@@ -7,11 +7,16 @@ import type { Answers } from 'inquirer';
 import { Prompts } from './prompts';
 import type { OtiAnswers } from './prompts';
 import { dependencies, devDependencies } from './dependencies';
-import { useCliAction } from './actions';
+import { Action, useCliAction } from './actions';
 
-// Uncomment for VSCode help, comment to compile
+// Uncomment for VSCode help, comment to compile (ESM stupidness)
 // import type { NodePlopAPI } from 'plop';
-type NodePlopAPI = any;
+interface NodePlopAPI {
+  load(name: string): void;
+  setHelper(name: string, helper: HelperDelegate): void;
+  setActionType(name: string, fn: Action): void;
+  setGenerator(name: string, config: Record<string, ReturnType<typeof JSON.parse>>): void;
+}
 
 module.exports = function (plop: NodePlopAPI) {
   plop.load('plop-pack-git-init');

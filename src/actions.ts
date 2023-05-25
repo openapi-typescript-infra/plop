@@ -1,9 +1,12 @@
 import { spawnSync } from 'node:child_process';
+
 import { OtiAnswers } from './prompts';
+
+export type Action = (answers: OtiAnswers, config: CliActionConfig, plop: NodePlopAPI) => Promise<void> | void;
 
 // Uncomment for VSCode help, comment to compile
 // import type { NodePlopAPI } from 'plop';
-type NodePlopAPI = any;
+type NodePlopAPI = { setActionType(name: string, action: Action): void };
 
 interface CliActionConfig {
   command: string;
@@ -11,10 +14,8 @@ interface CliActionConfig {
   cwd?: string;
 }
 
-type Action = (answers: OtiAnswers, config: CliActionConfig, plop: NodePlopAPI) => Promise<void> | void;
-
 export function useCliAction(plop: NodePlopAPI) {
-  plop.setActionType('cli', ((answers, config, plop) => {
+  plop.setActionType('cli', ((answers, config) => {
     spawnSync(config.command, config.args || [], {
       cwd: config.cwd,
       stdio: 'inherit',

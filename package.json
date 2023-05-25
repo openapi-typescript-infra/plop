@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "test": "echo \"TODO: write tests\" && exit 0",
     "clean": "yarn dlx rimraf ./build",
     "lint": "eslint src",
     "prepack": "pinst --disable",
