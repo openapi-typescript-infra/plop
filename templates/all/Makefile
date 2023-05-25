@@ -1,0 +1,42 @@
+#!make
+.PHONY: all build clean
+
+src_files := $(shell find src -name '*.ts')
+build_files := $(patsubst src/%.ts,build/%.js,$(src_files))
+
+all: service $(word 1, $(build_files)) {{#inArray features 'db'}}dbi{{/inArray}}
+
+ts: $(word 1, $(build_files))
+
+$(word 1, $(build_files)): $(src_files)
+	./node_modules/.bin/tsc -p tsconfig.build.json
+
+clean:
+	yarn dlx rimraf ./build src/generated
+
+service: src/generated/service/index.ts
+
+{{#inArray features 'db'}}
+db-ci:
+	yarn dlx run-pg-sql -q postgres ./migrations/setup/ci_setup.sql
+	yarn dlx run-pg-sql -q postgres ./migrations/setup/db_setup.sql
+	yarn migration:apply
+	yarn dlx run-pg-sql tokens ./migrations/setup/dev_setup.sql
+
+db-drop:
+	yarn dlx run-pg-sql -q tokens ./migrations/setup/db_clean.sql || true
+
+db-clean: db-drop db-ci
+
+dbi:
+	echo "Generating database types"
+	DATABASE_URL=postgres://postgres:postgres@localhost/keys yarn kysely-codegen \
+		--dialect postgres --schema public \
+		--out-file src/generated/database.ts
+{{/inArray}}
+
+src/generated/service/index.ts: api/key-management-serv.yaml
+	echo "Building service interface"
+	yarn dlx openapi-typescript-express ./api/key-management-serv.yaml \
+		--output ./src/generated/service/index.ts
+	./node_modules/.bin/prettier ./src/generated/service/index.ts --write

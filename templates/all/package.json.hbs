@@ -1,0 +1,53 @@
+{
+  "name": "{{name}}",
+  "version": "1.0.0",
+  "description": "{{desc}}",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "test": "oti-jest",
+    "build": "make",
+    "watch": "nodemon",
+    "clean": "make clean",
+    "start": "start-service",
+    "repl": "start-service --repl",
+{{#inArray features 'db'}}    "ci-setup": "make db-ci",
+    "db:create": "yarn dlx run-pg-sql postgres ./migrations/setup/db_setup.sql",
+    "migration:apply": "db-migrate --config migrations/db-migrate.json up",
+    "migration:undo": "db-migrate --config migrations/db-migrate.json down",
+    "migration:create": "db-migrate --config migrations/db-migrate.json create",
+{{/inArray}}
+    "lint": "eslint .",
+    "postinstall": "husky install && coconfig"
+  },
+  "config": {
+    "coconfig": "@openapi-typescript-infra/coconfig"
+  },
+  "engines": {
+    "node": ">18.0.0"
+  },
+  "author": "Developers <developers@gasbuddy.com>",
+  "license": "{{ternary (eq access 'public') 'MIT' 'UNLICENSED' }}",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openapi-typescript-infra/{{ name }}.git"
+  },
+  "keywords": [
+    "typescript",
+    "openapi",
+    "express"
+  ],
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "yarn eslint --cache --fix"
+  },
+  "devDependencies": {
+{{#forEach devDependencies}}
+    "{{name}}": "{{spec}}"{{#unless isLast}},{{/unless}}
+{{/forEach}}
+  },
+  "dependencies": {
+{{#forEach dependencies}}
+    "{{name}}": "{{spec}}"{{#unless isLast}},{{/unless}}
+{{/forEach}}
+  }
+}

@@ -1,0 +1,34 @@
+{{#inArray features 'db'}}import type { Kysely } from 'kysely';{{/inArray}}
+import type {
+  RequestLocals,
+  RequestWithApp,
+  Service,
+  ServiceExpress,
+  ServiceLocals,
+} from '@openapi-typescript-infra/service';
+
+{{#inArray features 'db'}}
+import type { DB } from '../generated/database';
+{{/inArray}}
+import type { operationHandlers } from '../generated/service';
+
+export interface {{properCase name}}Locals extends ServiceLocals {
+{{#inArray}}  db: Kysely<DB>;
+{{/inArray}}
+}
+
+export type {{properCase name}}RequestLocals = RequestLocals;
+
+export type {{properCase name}}Request = RequestWithApp<{{properCase name}}Locals>;
+
+export type {{properCase name}}Service = Service<
+  {{properCase name}}Locals,
+  {{properCase name}}RequestLocals
+>;
+
+export type {{properCase name}}App = ServiceExpress<{{properCase name}}Locals>;
+
+export type {{properCase name}}Api = operationHandlers<
+  {{properCase name}}Locals,
+  {{properCase name}}RequestLocals
+>;

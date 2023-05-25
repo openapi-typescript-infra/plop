@@ -1,0 +1,12 @@
+import request from 'supertest';
+import { getExistingApp, getReusableApp } from '@openapi-typescript-infra/service-tester';
+
+describe('Basic test', () => {
+  it('make an encryption key', async () => {
+    const app = await getReusableApp();
+
+    await request(app)
+      .get('/unknown-url')
+      .expect(404)
+  });
+});

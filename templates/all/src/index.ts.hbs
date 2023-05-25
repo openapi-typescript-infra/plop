@@ -1,0 +1,36 @@
+{{#inArray features 'db'}}
+import { Pool } from 'pg';
+import { Kysely, PostgresDialect } from 'kysely';
+
+import type { DB } from './generated/database';
+{{/inArray}}
+import type { {{properCase name}}Service, {{properCase name}}ConfigSchema } from './types';
+
+type Config = {{properCase name}}ConfigSchema;
+
+export function service(): {{properCase name}}Service {
+  return {
+    async start(app) {
+      // Load and configure your service wide infra here
+      {{#inArray features 'db'}}
+      const db = new Kysely<DB>({
+        dialect: new PostgresDialect({
+          pool: new Pool(app.locals.config.get<Config['db']>('db') as Config['db']),
+        }),
+      });
+      {{/inArray}}
+
+      // Assign your service-wide capabilities here
+      Object.assign(app.locals, {
+{{#inArray features 'db'}}        db,{{/inArray}}
+      });
+    },
+    async stop(app) {
+      const { locals } = app;
+      // Shutdown any service wide infra here
+      {{#inArray features 'db'}}
+      await locals.db.destroy();
+      {{/inArray}}
+    },
+  };
+}
