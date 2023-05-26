@@ -10,7 +10,7 @@ other infra to get up and running quickly. The generally expected conventions fo
 ```
 mkdir my-cool-api
 cd my-cool-api
-yarn init @openapi-typescript-infra
+yarn create @openapi-typescript-infra
 ```
 
 After that you can run `yarn build` to vet things, then `yarn test`. Then you should get to work on your API spec, which you can find in the `api` directory of your newly created project.

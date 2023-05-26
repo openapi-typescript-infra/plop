@@ -21,6 +21,9 @@
   "bin": {
     "create-oti-service": "./build/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "release": {
     "branches": [
       "main"
