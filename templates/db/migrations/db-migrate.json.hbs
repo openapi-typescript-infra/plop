@@ -1,0 +1,18 @@
+{
+  "defaultEnv": "development",
+  "development": {
+    "driver": "pg",
+    "user": { "ENV": "dbowner" },
+    "password": { "ENV": "onlyindev" },
+    "host": { "ENV": "localhost" },
+    "database": "{{dbName}}"
+   },
+   "production": {
+    "driver": "pg",
+    "user": { "ENV": "PGUSER" },
+    "password": { "ENV": "PGPASSWORD" },
+    "host": { "ENV": "PGHOST" },
+    "database": "{{dbName}}"
+   },
+   "sql-file": true
+}

@@ -13,7 +13,7 @@ import type { DB } from '../generated/database';
 import type { operationHandlers } from '../generated/service';
 
 export interface {{properCase name}}Locals extends ServiceLocals {
-{{#inArray}}  db: Kysely<DB>;
+{{#inArray features 'db'}}  db: Kysely<DB>;
 {{/inArray}}
 }
 

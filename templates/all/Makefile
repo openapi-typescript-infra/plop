@@ -4,7 +4,7 @@
 src_files := $(shell find src -name '*.ts')
 build_files := $(patsubst src/%.ts,build/%.js,$(src_files))
 
-all: service $(word 1, $(build_files)) {{#inArray features 'db'}}dbi{{/inArray}}
+all: service {{#inArray features 'db'}}dbi {{/inArray}}$(word 1, $(build_files))
 
 ts: $(word 1, $(build_files))
 
@@ -21,10 +21,10 @@ db-ci:
 	yarn dlx run-pg-sql -q postgres ./migrations/setup/ci_setup.sql
 	yarn dlx run-pg-sql -q postgres ./migrations/setup/db_setup.sql
 	yarn migration:apply
-	yarn dlx run-pg-sql tokens ./migrations/setup/dev_setup.sql
+	yarn dlx run-pg-sql {{dbName}} ./migrations/setup/dev_setup.sql
 
 db-drop:
-	yarn dlx run-pg-sql -q tokens ./migrations/setup/db_clean.sql || true
+	yarn dlx run-pg-sql -q {{dbName}} ./migrations/setup/db_clean.sql || true
 
 db-clean: db-drop db-ci
 
@@ -35,8 +35,8 @@ dbi:
 		--out-file src/generated/database.ts
 {{/inArray}}
 
-src/generated/service/index.ts: api/key-management-serv.yaml
+src/generated/service/index.ts: api/{{dashCase name}}.yaml
 	echo "Building service interface"
-	yarn dlx openapi-typescript-express ./api/key-management-serv.yaml \
+	yarn dlx openapi-typescript-express ./api/{{dashCase name}}.yaml \
 		--output ./src/generated/service/index.ts
 	./node_modules/.bin/prettier ./src/generated/service/index.ts --write

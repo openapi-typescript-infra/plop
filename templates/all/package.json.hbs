@@ -1,5 +1,6 @@
 {
-  "name": "{{name}}",
+  "name": "@{{org}}/{{name}}",
+  "private": true,
   "version": "1.0.0",
   "description": "{{desc}}",
   "main": "build/index.js",
@@ -26,11 +27,11 @@
   "engines": {
     "node": ">18.0.0"
   },
-  "author": "Developers <developers@gasbuddy.com>",
+  "author": "{{fullname}} <{{email}}>",
   "license": "{{ternary (eq access 'public') 'MIT' 'UNLICENSED' }}",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openapi-typescript-infra/{{ name }}.git"
+    "url": "git+https://github.com/{{org}}/{{ name }}.git"
   },
   "keywords": [
     "typescript",
