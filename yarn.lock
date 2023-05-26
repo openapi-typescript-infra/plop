@@ -396,7 +396,7 @@ __metadata:
     prettier: ^2.8.8
     typescript: ^5.0.4
   bin:
-    create-oti-service: ./build/index.js
+    create: ./build/index.js
   languageName: unknown
   linkType: soft
 
