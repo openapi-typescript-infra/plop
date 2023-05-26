@@ -363,9 +363,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@openapi-typescript-infra/plop@workspace:.":
+"@openapi-typescript-infra/create@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@openapi-typescript-infra/plop@workspace:."
+  resolution: "@openapi-typescript-infra/create@workspace:."
   dependencies:
     "@commitlint/cli": ^17.6.3
     "@commitlint/config-conventional": ^17.6.3

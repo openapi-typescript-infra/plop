@@ -2,7 +2,7 @@
 
 {{desc}}
 
-This project has been made with @openapi-typescript-infra/plop. You should write a glowing and detailed README about
+This project has been made with @openapi-typescript-infra/create. You should write a glowing and detailed README about
 all the things your services does. BUT, before you replace this with that, you probably want to:
 
 * Add your OpenAPI specification details to api/{{snakeCase name}}

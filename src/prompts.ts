@@ -4,7 +4,7 @@ import Configstore from 'configstore';
 import parseGitConfig from 'parse-git-config';
 import type { PromptQuestion } from 'node-plop';
 
-const config = new Configstore('@openapi-typescript-infra/plop');
+const config = new Configstore('@openapi-typescript-infra/create');
 
 export interface OtiAnswers {
   name: string;

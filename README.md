@@ -1,4 +1,4 @@
-# @openapi-typescript-infra/plop
+# @openapi-typescript-infra/create
 
 A plop-based project generator and maintenance tool for [services](/openapi-typescript-infra/service). Builds tests and
 other infra to get up and running quickly. The generally expected conventions for project naming are:
@@ -10,13 +10,7 @@ other infra to get up and running quickly. The generally expected conventions fo
 ```
 mkdir my-cool-api
 cd my-cool-api
-yarn dlx @openapi-typescript-infra/plop
-```
-
-```
-mkdir my-cool-api
-cd my-cool-api
-npx @openapi-typescript-infra/plop
+yarn init @openapi-typescript-infra
 ```
 
 After that you can run `yarn build` to vet things, then `yarn test`. Then you should get to work on your API spec, which you can find in the `api` directory of your newly created project.
