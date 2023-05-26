@@ -1,8 +1,10 @@
-{{#inArray features 'db'}}
+{{#inArray features 'redis'}}
+import Redis from 'ioredis';{{/inArray}}{{#inArray features 'db'}}
 import { Pool } from 'pg';
 import { Kysely, PostgresDialect } from 'kysely';
 
 import type { DB } from './generated/database';
+{{else}}
 {{/inArray}}
 import type { {{properCase name}}Service, {{properCase name}}ConfigSchema } from './types';
 
@@ -20,9 +22,15 @@ export function service(): {{properCase name}}Service {
       });
       {{/inArray}}
 
+      {{#inArray features 'redis'}}
+      const { enabled: redisEnabled, ...redisConfig } = app.locals.config.get<Config['redis']>('redis') || {};
+      const redis = redisEnabled ? new Redis(redisConfig) : undefined;
+      {{/inArray}}
+
       // Assign your service-wide capabilities here
       Object.assign(app.locals, {
 {{#inArray features 'db'}}        db,{{/inArray}}
+{{#inArray features 'redis'}}        redis,{{/inArray}}
       });
     },
     async stop(app) {
@@ -30,6 +38,8 @@ export function service(): {{properCase name}}Service {
       // Shutdown any service wide infra here
       {{#inArray features 'db'}}
       await locals.db.destroy();
+      {{/inArray}}{{#inArray features 'redis'}}
+      locals.redis?.disconnect();
       {{/inArray}}
     },
   };

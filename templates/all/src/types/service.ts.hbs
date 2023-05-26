@@ -1,4 +1,5 @@
 {{#inArray features 'db'}}import type { Kysely } from 'kysely';{{/inArray}}
+{{#inArray features 'redis'}}import type { Redis } from 'ioredis';{{/inArray}}
 import type {
   RequestLocals,
   RequestWithApp,
@@ -14,6 +15,7 @@ import type { operationHandlers } from '../generated/service';
 
 export interface {{properCase name}}Locals extends ServiceLocals {
 {{#inArray features 'db'}}  db: Kysely<DB>;
+{{/inArray}}{{#inArray features 'redis'}}  redis?: Redis;
 {{/inArray}}
 }
 

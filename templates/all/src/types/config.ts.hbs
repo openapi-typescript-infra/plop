@@ -1,9 +1,12 @@
 {{#inArray features 'db'}}import type { ClientConfig } from 'pg';
+{{/inArray}}{{#inArray features 'redis'}}import type { RedisOptions } from 'ioredis';
 {{/inArray}}
 import type { ConfigurationSchema } from '@openapi-typescript-infra/service';
 
 export interface {{properCase name}}ConfigSchema extends ConfigurationSchema {
 {{#inArray features 'db'}}
   db: ClientConfig;
+{{/inArray}}{{#inArray features 'redis'}}
+  redis: { enabled: boolean; } & RedisOptions;
 {{/inArray}}
 }

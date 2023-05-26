@@ -4,6 +4,10 @@
 src_files := $(shell find src -name '*.ts')
 build_files := $(patsubst src/%.ts,build/%.js,$(src_files))
 
+PGUSER := postgres
+PGPASSWORD := postgres
+PGHOST := localhost
+
 all: service {{#inArray features 'db'}}dbi {{/inArray}}$(word 1, $(build_files))
 
 ts: $(word 1, $(build_files))
@@ -18,19 +22,19 @@ service: src/generated/service/index.ts
 
 {{#inArray features 'db'}}
 db-ci:
-	yarn dlx run-pg-sql -q postgres ./migrations/setup/ci_setup.sql
-	yarn dlx run-pg-sql -q postgres ./migrations/setup/db_setup.sql
+	PGHOST=$(PGHOST) PGUSER=$(PGUSER) PGPASSWORD=$(PGPASSWORD) yarn dlx run-pg-sql -q postgres ./migrations/setup/ci_setup.sql
+	PGHOST=$(PGHOST) PGUSER=$(PGUSER) PGPASSWORD=$(PGPASSWORD) yarn dlx run-pg-sql -q postgres ./migrations/setup/db_setup.sql
 	yarn migration:apply
-	yarn dlx run-pg-sql {{dbName}} ./migrations/setup/dev_setup.sql
+	PGHOST=$(PGHOST) PGUSER=$(PGUSER) PGPASSWORD=$(PGPASSWORD) yarn dlx run-pg-sql {{dbName}} ./migrations/setup/dev_setup.sql
 
 db-drop:
-	yarn dlx run-pg-sql -q {{dbName}} ./migrations/setup/db_clean.sql || true
+	PGHOST=$(PGHOST) PGUSER=$(PGUSER) PGPASSWORD=$(PGPASSWORD) yarn dlx run-pg-sql -q {{dbName}} ./migrations/setup/db_clean.sql || true
 
 db-clean: db-drop db-ci
 
 dbi:
 	echo "Generating database types"
-	DATABASE_URL=postgres://postgres:postgres@localhost/keys yarn kysely-codegen \
+	DATABASE_URL=postgres://postgres:postgres@localhost/{{dbName}} yarn kysely-codegen \
 		--dialect postgres --schema public \
 		--out-file src/generated/database.ts
 {{/inArray}}

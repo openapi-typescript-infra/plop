@@ -1,7 +1,7 @@
 import path from 'node:path';
 
 import Configstore from 'configstore';
-import { sync } from 'parse-git-config';
+import parseGitConfig from 'parse-git-config';
 import type { PromptQuestion } from 'node-plop';
 
 const config = new Configstore('@openapi-typescript-infra/plop');
@@ -19,7 +19,8 @@ function saver(fieldName: string) {
   };
 }
 
-const gitConfig = sync({ type: 'global' });
+// eslint-disable-next-line import/no-named-as-default-member
+const gitConfig = parseGitConfig.sync({ type: 'global' });
 
 function removeType(name: string) {
   const parts = name.split('-');

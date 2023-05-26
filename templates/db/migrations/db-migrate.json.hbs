@@ -2,9 +2,10 @@
   "defaultEnv": "development",
   "development": {
     "driver": "pg",
-    "user": { "ENV": "dbowner" },
-    "password": { "ENV": "onlyindev" },
-    "host": { "ENV": "localhost" },
+    "driver": "pg",
+    "user": "dbowner",
+    "password": "onlyindev",
+    "host": "localhost",
     "database": "{{dbName}}"
    },
    "production": {

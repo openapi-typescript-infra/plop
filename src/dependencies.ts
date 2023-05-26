@@ -18,6 +18,11 @@ export function dependencies({ features }: { features: string[] }) {
       pg: '^8.11.0',
     });
   }
+  if (features.includes('redis')) {
+    Object.assign(deps, {
+      ioredis: '^5.3.2',
+    });
+  }
   return sortByKey(deps);
 }
 
