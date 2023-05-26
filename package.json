@@ -18,9 +18,7 @@
     "postpack": "pinst --enable",
     "postinstall": "husky install && coconfig"
   },
-  "bin": {
-    "create-oti-service": "./build/index.js"
-  },
+  "bin": "./build/index.js",
   "publishConfig": {
     "access": "public"
   },
