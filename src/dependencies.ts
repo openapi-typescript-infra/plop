@@ -48,6 +48,7 @@ export function devDependencies({ features }: { features: string[] }) {
   };
   if (features.includes('db')) {
     Object.assign(deps, {
+      'run-pg-sql': '^1.1.0',
       'db-migrate': '^0.11.13',
       'db-migrate-pg': '^1.3.0',
       'kysely-codegen': '^0.10.0',
