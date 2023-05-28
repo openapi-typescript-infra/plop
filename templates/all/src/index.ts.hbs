@@ -1,3 +1,4 @@
+import { useService } from '@openapi-typescript-infra/service';
 {{#inArray features 'redis'}}
 import Redis from 'ioredis';{{/inArray}}{{#inArray features 'db'}}
 import { Pool } from 'pg';
@@ -11,8 +12,11 @@ import type { {{properCase name}}Service, {{properCase name}}ConfigSchema } from
 type Config = {{properCase name}}ConfigSchema;
 
 export function service(): {{properCase name}}Service {
+  const base = useService();
   return {
+    ...base,
     async start(app) {
+      await base.start(app);
       // Load and configure your service wide infra here
       {{#inArray features 'db'}}
       const db = new Kysely<DB>({
@@ -34,6 +38,7 @@ export function service(): {{properCase name}}Service {
       });
     },
     async stop(app) {
+      await base.stop(app);
       const { locals } = app;
       // Shutdown any service wide infra here
       {{#inArray features 'db'}}
