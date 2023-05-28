@@ -90,7 +90,18 @@ export default function (plop: NodePlopAPI) {
           // By default is false, but if "true" will log the output of commands
           verbose: true,
         },
-      ].filter(a => typeof a === 'object');
+        `
+Your project is ready to roll! We ran yarn for you, so your next steps are:
+* Go into the api directory and edit your API specification.
+  You could use https://editor.swagger.io/ and then paste the yaml back in.
+${data?.features.includes('db') ? `* Go into migrations/sql and add your initial database up/down migration to the existing files
+* Run "make db-ci" to create the database and run the migrations.` : ''}
+* Run "yarn test" to just make sure the environment is all sorted out.
+* Run "yarn build" to build the database interface, service types and TS code.
+* Start implementing your API by adding appropriate handler methods.
+
+Happy hacking!`,
+      ].filter(a => typeof a === 'object' || typeof a === 'string');
     },
   });
 }

@@ -7,12 +7,12 @@ import { Kysely, PostgresDialect } from 'kysely';
 import type { DB } from './generated/database';
 {{else}}
 {{/inArray}}
-import type { {{properCase name}}Service, {{properCase name}}ConfigSchema } from './types';
+import type { {{properCase name}}Locals, {{properCase name}}Service, {{properCase name}}ConfigSchema } from './types';
 
 type Config = {{properCase name}}ConfigSchema;
 
 export function service(): {{properCase name}}Service {
-  const base = useService();
+  const base = useService<{{properCase name}}Locals>();
   return {
     ...base,
     async start(app) {
@@ -38,7 +38,7 @@ export function service(): {{properCase name}}Service {
       });
     },
     async stop(app) {
-      await base.stop(app);
+      await base.stop?.(app);
       const { locals } = app;
       // Shutdown any service wide infra here
       {{#inArray features 'db'}}
