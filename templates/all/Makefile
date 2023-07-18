@@ -3,7 +3,7 @@
 
 .PHONY: all build clean
 
-all: service {{#inArray features 'db'}}dbi {{/inArray}}$(word 1, $(build_files))
+all: service {{#inArray features 'db'}}dbi {{/inArray}}ts
 
 {{#inArray features 'db'}}export DB_NAME ?= {{dbName}}
 {{/inArray}}export SERVICE_NAME ?= {{dashCase name}}
