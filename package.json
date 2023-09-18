@@ -6,7 +6,9 @@
   "exports": {
     ".": "./build/index.js",
     "./api": "./build/apiProject.js",
-    "./handlers": "./build/handlers.js"
+    "./handlers": "./build/handlers.js",
+    "./actions": "./build/actions.js",
+    "./prompts": "./build/prompts.js"
   },
   "author": "Max Metral <developers@pyralis.com>",
   "license": "MIT",
