@@ -13,7 +13,7 @@
   "author": "Max Metral <developers@pyralis.com>",
   "license": "MIT",
   "config": {
-    "coconfig": "./coconfig.cjs"
+    "coconfig": "@openapi-typescript-infra/coconfig"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
@@ -37,28 +37,27 @@
     "*.{js,jsx,ts,tsx}": "yarn eslint src --cache --fix"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
-    "@commitlint/config-conventional": "^17.6.6",
-    "@openapi-typescript-infra/coconfig": "^3.2.0",
+    "@commitlint/cli": "^17.7.1",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@openapi-typescript-infra/coconfig": "^4.2.0",
     "@types/configstore": "^6.0.0",
-    "@types/handlebars-helpers": "^0.5.3",
+    "@types/handlebars-helpers": "^0.5.4",
     "@types/minimist": "^1.2.2",
-    "@types/node": "^20.4.2",
+    "@types/node": "^20.6.2",
     "@types/parse-git-config": "^3.0.1",
     "@types/pascalcase": "^1.0.1",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0",
-    "coconfig": "^0.12.2",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^27.2.3",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "coconfig": "^0.13.3",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
+    "lint-staged": "^14.0.1",
     "pinst": "^3.0.0",
-    "prettier": "^3.0.0",
-    "typescript": "^5.1.6"
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
   },
   "packageManager": "yarn@3.5.1",
   "dependencies": {
@@ -70,7 +69,7 @@
     "mkdirp": "^3.0.1",
     "openapi-types": "^12.1.3",
     "parse-git-config": "^3.0.0",
-    "plop": "^3.1.2",
+    "plop": "^4.0.0",
     "plop-pack-git-init": "^0.3.1"
   }
 }
