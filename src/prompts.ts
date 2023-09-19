@@ -88,6 +88,12 @@ export const Prompts: Record<string, PromptQuestion> = {
     name: 'dbName',
     when: (answers) => answers.features.includes('db'),
     message: 'What will be the name of the database?',
-    default: (answers: OtiAnswers) => removeType(answers.name),
+    validate(input) {
+      if (!/^[a-zA-Z_][a-zA-Z0-9_]{0,62}$/.test(input)) {
+        return 'That database name is not a valid postgres identifier';
+      }
+      return true;
+    },
+    default: (answers: OtiAnswers) => removeType(answers.name).replace('-', '_'),
   },
 };
