@@ -4,6 +4,7 @@ import * as url from 'url';
 import Helpers from 'handlebars-helpers';
 import type { HelperDelegate } from 'handlebars';
 import type { NodePlopAPI } from 'plop';
+import type { PromptQuestion } from 'node-plop';
 
 import { Prompts } from './prompts.js';
 import type { OtiAnswers } from './prompts.js';
@@ -38,12 +39,12 @@ export default function (plop: NodePlopAPI) {
   plop.setGenerator('api', {
     description: 'Generate an API service',
     prompts: [
-      Prompts.dirWarning,
+      process.env.NO_DIR_WARNING ? undefined : Prompts.dirWarning,
       Prompts.email, Prompts.fullname, Prompts.org,
       Prompts.name, Prompts.desc,
       Prompts.features,
       Prompts.dbName,
-    ],
+    ].filter((p) => !!p) as PromptQuestion[],
     actions(data) {
       return [
         {

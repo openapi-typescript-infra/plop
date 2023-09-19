@@ -6,7 +6,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "test": "oti-jest",
+    "test": "vitest",
     "build": "make",
     "watch": "nodemon",
     "clean": "make clean",
@@ -19,7 +19,7 @@
     "migration:create": "db-migrate --config migrations/db-migrate.json create",
 {{/inArray}}
     "lint": "eslint .",
-    "postinstall": "husky install && coconfig"
+    "postinstall": "coconfig"
   },
   "config": {
     "coconfig": "@openapi-typescript-infra/coconfig"
@@ -38,9 +38,6 @@
     "openapi",
     "express"
   ],
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "yarn eslint --cache --fix"
-  },
   "devDependencies": {
 {{#forEach devDependencies}}
     "{{name}}": "{{spec}}"{{#unless isLast}},{{/unless}}

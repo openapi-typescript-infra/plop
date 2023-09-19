@@ -9,13 +9,13 @@ function sortByKey(deps: Record<string, string>) {
 
 export function dependencies({ features }: { features: string[] }) {
   const deps = {
-    '@openapi-typescript-infra/coconfig': '^3.2.0',
-    '@openapi-typescript-infra/service': '^1.1.3',
+    '@openapi-typescript-infra/coconfig': '^4.1.0',
+    '@openapi-typescript-infra/service': '^2.7.1',
   } as Record<string, string>;
   if (features.includes('db')) {
     Object.assign(deps, {
-      kysely: '^0.24.2',
-      pg: '^8.11.0',
+      kysely: '^0.26.3',
+      pg: '^8.11.3',
     });
   }
   if (features.includes('redis')) {
@@ -28,30 +28,23 @@ export function dependencies({ features }: { features: string[] }) {
 
 export function devDependencies({ features }: { features: string[] }) {
   const deps = {
-    coconfig: '^0.12.2',
-    '@openapi-typescript-infra/service-tester': '^1.0.5',
-    '@typescript-eslint/eslint-plugin': '^6.1.0',
-    '@typescript-eslint/parser': '^6.1.0',
-    '@types/jest': '^29.5.3',
-    eslint: '^8.45.0',
-    'eslint-config-prettier': '^8.8.0',
-    'eslint-plugin-cypress': '^2.13.3',
-    'eslint-plugin-import': '^2.27.5',
-    'eslint-plugin-jest': '^27.2.3',
-    husky: '^8.0.3',
-    jest: '^29.6.1',
-    'jest-openapi': '^0.14.2',
-    'lint-staged': '^13.2.3',
-    'prettier': '^3.0.0',
-    'ts-jest': '^29.1.1',
-    typescript: '^5.1.6',
+    coconfig: '^0.13.3',
+    '@openapi-typescript-infra/service-tester': '^2.1.1',
+    '@typescript-eslint/eslint-plugin': '^6.7.2',
+    '@typescript-eslint/parser': '^6.7.2',
+    eslint: '^8.49.0',
+    'eslint-config-prettier': '^9.0.0',
+    'eslint-plugin-import': '^2.28.1',
+    prettier: '^3.0.3',
+    typescript: '^5.2.2',
+    vitest: '^0.34.4',
   };
   if (features.includes('db')) {
     Object.assign(deps, {
-      'run-pg-sql': '^1.1.0',
-      'db-migrate': '^0.11.13',
-      'db-migrate-pg': '^1.3.0',
-      'kysely-codegen': '^0.10.0',
+      'run-pg-sql': '^1.2.0',
+      'db-migrate': '^0.11.14',
+      'db-migrate-pg': '^1.5.2',
+      'kysely-codegen': '^0.10.1',
     });
   }
   return sortByKey(deps);
