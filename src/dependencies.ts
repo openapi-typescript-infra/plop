@@ -9,8 +9,8 @@ function sortByKey(deps: Record<string, string>) {
 
 export function dependencies({ features }: { features: string[] }) {
   const deps = {
-    '@openapi-typescript-infra/coconfig': '^4.1.0',
-    '@openapi-typescript-infra/service': '^2.7.1',
+    '@openapi-typescript-infra/coconfig': '^4.2.0',
+    '@openapi-typescript-infra/service': '^2.7.3',
   } as Record<string, string>;
   if (features.includes('db')) {
     Object.assign(deps, {

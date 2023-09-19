@@ -6,6 +6,7 @@ import type {
   Service,
   ServiceExpress,
   ServiceLocals,
+  ServiceTypes,
 } from '@openapi-typescript-infra/service';
 
 {{#inArray features 'db'}}
@@ -19,16 +20,9 @@ export interface {{properCase name}}Locals extends ServiceLocals {
 {{/inArray}}
 }
 
-export type {{properCase name}}RequestLocals = RequestLocals;
+export interface {{properCase name}}RequestLocals extends RequestLocals {}
 
-export type {{properCase name}}Request = RequestWithApp<{{properCase name}}Locals>;
-
-export type {{properCase name}}Service = Service<
-  {{properCase name}}Locals,
-  {{properCase name}}RequestLocals
->;
-
-export type {{properCase name}}App = ServiceExpress<{{properCase name}}Locals>;
+export interface {{properCase name}} extends ServiceTypes<{{properCase name}}Locals, {{properCase name}}RequestLocals> {}
 
 export type {{properCase name}}Api = operationHandlers<
   {{properCase name}}Locals,

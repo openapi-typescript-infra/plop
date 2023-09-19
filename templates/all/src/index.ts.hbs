@@ -7,12 +7,12 @@ import { Kysely, PostgresDialect } from 'kysely';
 import type { DB } from './generated/database';
 {{else}}
 {{/inArray}}
-import type { {{properCase name}}Locals, {{properCase name}}Service, {{properCase name}}ConfigSchema } from './types';
+import type { {{properCase name}}, {{properCase name}}ConfigSchema } from './types';
 
 type Config = {{properCase name}}ConfigSchema;
 
-export function service(): {{properCase name}}Service {
-  const base = useService<{{properCase name}}Locals>();
+export function service(): {{properCase name}}['Service'] {
+  const base = useService<{{properCase name}}['ServiceLocals']>();
   return {
     ...base,
     async start(app) {
