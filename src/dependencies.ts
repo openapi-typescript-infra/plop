@@ -32,11 +32,11 @@ export function devDependencies({ features }: { features: string[] }) {
     '@openapi-typescript-infra/service-tester': '^2.1.1',
     '@typescript-eslint/eslint-plugin': '^6.7.2',
     '@typescript-eslint/parser': '^6.7.2',
-    eslint: '^8.45.0',
+    eslint: '^8.49.0',
     'eslint-config-prettier': '^9.0.0',
     'eslint-plugin-import': '^2.28.1',
-    'prettier': '^3.0.0',
-    typescript: '^5.1.6',
+    prettier: '^3.0.3',
+    typescript: '^5.2.2',
     vitest: '^0.34.4',
   };
   if (features.includes('db')) {
