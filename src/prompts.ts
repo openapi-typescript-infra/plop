@@ -12,9 +12,12 @@ export interface OtiAnswers {
   features: string[];
 }
 
-function saver(fieldName: string) {
+function saver(fieldName: string, required: boolean) {
   return (value: string) => {
     config.set(fieldName, value);
+    if (required) {
+      return value?.trim() ? true : 'This field is required';
+    }
     return true;
   };
 }
@@ -45,21 +48,21 @@ export const Prompts: Record<string, PromptQuestion> = {
     type: 'input',
     name: 'email',
     message: 'What is the developer email address for package.json?',
-    validate: saver('email'),
+    validate: saver('email', false),
     default: config.get('email') || gitConfig?.user?.email,
   },
   fullname: {
     type: 'input',
     name: 'fullname',
     message: 'What is the developer name for package.json?',
-    validate: saver('fullname'),
+    validate: saver('fullname', false),
     default: config.get('fullname') || gitConfig?.user?.name,
   },
   org: {
     type: 'input',
     name: 'org',
     message: 'What is the name of your github organization or your github username?',
-    validate: saver('org'),
+    validate: saver('org', true),
     default: config.get('org'),
   },
   name: {
