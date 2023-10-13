@@ -57,6 +57,9 @@ export default function (plop: NodePlopAPI) {
       return [
         async () => {
           const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          if (!pkg.name) {
+            throw new Error('Your package.json is missing a name field, please ensure it is set');
+          }
           const svcName = pkg.name.split('/').pop();
           const apiSpec = `api/${svcName}.yaml`;
           const { paths } = await OpenAPIParser.validate(apiSpec);
