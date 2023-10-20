@@ -10,7 +10,7 @@ function sortByKey(deps: Record<string, string>) {
 export function dependencies({ features }: { features: string[] }) {
   const deps = {
     '@openapi-typescript-infra/coconfig': '^4.2.0',
-    '@openapi-typescript-infra/service': '^2.7.3',
+    '@openapi-typescript-infra/service': '^4.5.1',
   } as Record<string, string>;
   if (features.includes('db')) {
     Object.assign(deps, {
@@ -29,10 +29,10 @@ export function dependencies({ features }: { features: string[] }) {
 export function devDependencies({ features }: { features: string[] }) {
   const deps = {
     coconfig: '^0.13.3',
-    '@openapi-typescript-infra/service-tester': '^2.1.1',
-    '@typescript-eslint/eslint-plugin': '^6.7.2',
-    '@typescript-eslint/parser': '^6.7.2',
-    eslint: '^8.49.0',
+    '@openapi-typescript-infra/service-tester': '^4.0.1',
+    '@typescript-eslint/eslint-plugin': '^6.8.0',
+    '@typescript-eslint/parser': '^6.8.0',
+    eslint: '^8.51.0',
     'eslint-config-prettier': '^9.0.0',
     'eslint-plugin-import': '^2.28.1',
     prettier: '^3.0.3',
