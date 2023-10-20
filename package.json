@@ -1,6 +1,6 @@
 {
   "name": "@openapi-typescript-infra/create",
-  "version": "1.1.0",
+  "version": "0.0.0",
   "description": "Project generator for @openapi-typescript-infra services",
   "type": "module",
   "exports": {
@@ -31,6 +31,12 @@
   "release": {
     "branches": [
       "main"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github"
     ]
   },
   "lint-staged": {
