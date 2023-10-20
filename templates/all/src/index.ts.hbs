@@ -7,9 +7,6 @@ import { Kysely, PostgresDialect } from 'kysely';
 import type { DB } from './generated/database';
 {{else}}
 {{/inArray}}
-import type { {{properCase name}}, {{properCase name}}ConfigSchema } from './types';
-
-type Config = {{properCase name}}ConfigSchema;
 
 export function service(): {{properCase name}}['Service'] {
   const base = useService<{{properCase name}}['ServiceLocals']>();
@@ -21,13 +18,13 @@ export function service(): {{properCase name}}['Service'] {
       {{#inArray features 'db'}}
       const db = new Kysely<DB>({
         dialect: new PostgresDialect({
-          pool: new Pool(app.locals.config.get<Config['db']>('db') as Config['db']),
+          pool: new Pool(app.locals.config.db),
         }),
       });
       {{/inArray}}
 
       {{#inArray features 'redis'}}
-      const { enabled: redisEnabled, ...redisConfig } = app.locals.config.get<Config['redis']>('redis') || {};
+      const { enabled: redisEnabled, ...redisConfig } = app.locals.config.redis || {};
       const redis = redisEnabled ? new Redis(redisConfig) : undefined;
       {{/inArray}}
 

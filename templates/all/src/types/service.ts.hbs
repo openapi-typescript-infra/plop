@@ -2,9 +2,6 @@
 {{#inArray features 'redis'}}import type { Redis } from 'ioredis';{{/inArray}}
 import type {
   RequestLocals,
-  RequestWithApp,
-  Service,
-  ServiceExpress,
   ServiceLocals,
   ServiceTypes,
 } from '@openapi-typescript-infra/service';
@@ -13,6 +10,8 @@ import type {
 import type { DB } from '../generated/database';
 {{/inArray}}
 import type { operationHandlers } from '../generated/service';
+
+import type { {{properCase name}}, {{properCase name}}ConfigSchema } from './types';
 
 export interface {{properCase name}}Locals extends ServiceLocals<{{properCase name}}ConfigSchema> {
 {{#inArray features 'db'}}  db: Kysely<DB>;

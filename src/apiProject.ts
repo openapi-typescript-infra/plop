@@ -83,7 +83,7 @@ export default function (plop: NodePlopAPI) {
         cli('yarn config set nodeLinker node-modules'),
         cli('yarn plugin import interactive-tools'),
         cli('yarn'),
-        cli('yarn lint --fix'),
+        cli('yarn lint --fix --max-warnings 10'),
         data?.features.includes('db') && cli('yarn migration:create initial-schema'),
         {
           type: 'gitInit',
