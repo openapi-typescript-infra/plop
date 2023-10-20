@@ -1,12 +1,16 @@
 name: Node CI
 
-on: [push]
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js 18
@@ -21,3 +25,30 @@ jobs:
         yarn test
       env:
         CI: true
+
+
+  publish-npm:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      issues: write
+      id-token: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: yarn
+      - run: yarn install --immutable
+      - run: yarn build
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: $\{{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: $\{{ secrets.SESAMECARE_OSS_NPM_TOKEN }}
+        run: |
+          yarn dlx semantic-release
+
