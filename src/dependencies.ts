@@ -14,6 +14,8 @@ export function dependencies({ features }: { features: string[] }) {
   } as Record<string, string>;
   if (features.includes('db')) {
     Object.assign(deps, {
+      'db-migrate': '^0.11.14',
+      'db-migrate-pg': '^1.5.2',
       kysely: '^0.26.3',
       pg: '^8.11.3',
     });
@@ -42,8 +44,6 @@ export function devDependencies({ features }: { features: string[] }) {
   if (features.includes('db')) {
     Object.assign(deps, {
       'run-pg-sql': '^1.2.0',
-      'db-migrate': '^0.11.14',
-      'db-migrate-pg': '^1.5.2',
       'kysely-codegen': '^0.10.1',
     });
   }
