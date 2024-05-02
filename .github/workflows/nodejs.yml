@@ -12,9 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js 18
-      uses: actions/setup-node@v3
+    - uses: actions/checkout@v4
+    - name: Use Node.js 20
+      uses: actions/setup-node@v4
       with:
         node-version: 20
     - name: npm install, lint, build, and test
@@ -37,13 +37,14 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: yarn
       - run: yarn install --immutable
       - run: yarn build
+      - run: pinst --disable
 
       - name: Release
         env:
