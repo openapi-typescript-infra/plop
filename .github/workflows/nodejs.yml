@@ -44,7 +44,7 @@ jobs:
           cache: yarn
       - run: yarn install --immutable
       - run: yarn build
-      - run: pinst --disable
+      - run: yarn pinst --disable
 
       - name: Release
         env:
