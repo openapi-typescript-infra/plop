@@ -7,11 +7,11 @@ import type {
 } from '@openapi-typescript-infra/service';
 
 {{#inArray features 'db'}}
-import type { DB } from '../generated/database';
+import type { DB } from '../generated/database.js';
 {{/inArray}}
-import type { operationHandlers } from '../generated/service';
+import type { operationHandlers } from '../generated/service.js';
 
-import type { {{properCase name}}, {{properCase name}}ConfigSchema } from './types';
+import type { {{properCase name}}, {{properCase name}}ConfigSchema } from './types.js';
 
 export interface {{properCase name}}Locals extends ServiceLocals<{{properCase name}}ConfigSchema> {
 {{#inArray features 'db'}}  db: Kysely<DB>;

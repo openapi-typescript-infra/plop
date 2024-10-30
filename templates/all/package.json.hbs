@@ -3,8 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "description": "{{desc}}",
-  "main": "build/index.js",
+  "main": "./build/index.js",
+  "exports": "./build/index.js",
+  "type": "module",
   "types": "build/index.d.ts",
+  "imports": {
+    "#src/*": "./src/*"
+  },
   "scripts": {
     "test": "vitest",
     "build": "make",
